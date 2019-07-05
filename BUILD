@@ -5,5 +5,5 @@ load(
 
 container_image(
   name = "mymysql",
-  base = "@mysql",
+  base = "@mysql//image",
 )

@@ -46,7 +46,7 @@ load(
 )
 container_pull(
   name = "mysql",
-  registry = "docker.io",
-  repository = "msql",
-  digest = "sha256:c3594c6528b31c6222ba426d836600abd45f554d078ef661d3c882604c70ad0a"
+  registry = "index.docker.io",
+  repository = "library/mysql",
+  digest = "sha256:710c9ca6c4df66bf0c93df0d761e0519018fa2f0edb8015bb0db6c7c3919a8e2"
 )
