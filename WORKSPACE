@@ -50,3 +50,9 @@ container_pull(
   repository = "library/mysql",
   digest = "sha256:710c9ca6c4df66bf0c93df0d761e0519018fa2f0edb8015bb0db6c7c3919a8e2"
 )
+container_pull(
+  name = "centos",
+  registry = "index.docker.io",
+  repository = "library/centos",
+  digest = "sha256:ca58fe458b8d94bc6e3072f1cfbd334855858e05e1fd633aa07cf7f82b048e66"
+)

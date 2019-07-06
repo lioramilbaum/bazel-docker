@@ -7,5 +7,5 @@ load(
 
 container_image(
   name = "image3",
-  base = "//image1:image1",
+  base = "@centos//image",
 )
