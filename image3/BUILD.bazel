@@ -1,11 +1,15 @@
 package(default_visibility = ["//visibility:public"])
 
 load(
-  "@io_bazel_rules_docker//container:image.bzl",
-  "container_image"
+  "//image3:image.bzl",
+  "operator_image"
 )
 
-container_image(
+operator_image(
   name = "image3",
   base = "@centos//image",
+  deps = [
+      "//image1:image1",
+      "//image2:image2",
+  ],
 )
