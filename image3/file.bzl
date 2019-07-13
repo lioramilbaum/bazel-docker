@@ -4,12 +4,27 @@ large files with a lot of static content, consider using
 `ctx.actions.expand_template` instead.
 """
 
-def _impl(ctx):
-    output = ctx.outputs.out
-    ctx.actions.write(output = output, content = ctx.attr.content)
+load(
+  "@io_bazel_rules_docker//container:providers.bzl",
+  "ImageInfo",
+)
 
-file = rule(
-    implementation = _impl,
-    attrs = {"content": attr.string()},
-    outputs = {"out": "%{name}.txt"},
+def _impl(ctx):
+    ctx.actions.run_shell(
+        outputs = [ctx.outputs.out],
+        command = "\n".join([
+            "cat %s %s > %s" % (
+                ctx.attr.deps[0][ImageInfo].container_parts['digest'].path,
+                ctx.attr.deps[1][ImageInfo].container_parts['digest'].path,
+                ctx.outputs.out.path
+            )
+        ]),
+    )
+
+operator_file = rule(
+  implementation = _impl,
+  attrs = {
+    "deps": attr.label_list(providers = [ImageInfo]),
+  },
+  outputs = {"out": "%{name}.txt"},
 )

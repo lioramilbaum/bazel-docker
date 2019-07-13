@@ -6,12 +6,7 @@ load(
   "container_image"
 )
 
-load(
-  "@io_bazel_rules_docker//container:container.bzl",
-  "container_push"
-)
-
-load(":file.bzl", "file")
+load(":file.bzl","operator_file")
 
 def operator_image(
   name,
@@ -24,21 +19,13 @@ def operator_image(
       base: Base image to use for the operator_image.
       deps: Dependencies of the operator image target.
   """
-  file(
+  operator_file(
       name = "list",
-      content = "A\nB\n",
+      deps = deps
   )
 
   container_image(
     name=name,
     base=base,
-    files=["//image3:list.txt"]
+    files=["//image3:list.txt"],
   )
-
-  container_push(
-   name = "publish",
-   image = ":image3",
-   format = "Docker",
-   registry = "localhost:5000",
-   repository = "image3"
-)
